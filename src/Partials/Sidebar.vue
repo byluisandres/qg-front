@@ -2,7 +2,8 @@
     <div className="flex">
 
         <!-- Backdrop -->
-        <div className="fixed z-10 inset-0 bg-neutral-900 opacity-10 transition-opacity lg:hidden py-2 hidden"></div>
+        <div className="
+        fixed z-10 inset-0 bg-neutral-900 opacity-10 transition-opacity lg:hidden py-2 hidden"></div>
 
         <!-- End Backdrop -->
         <aside className="fixed z-20 inset-y-0 left-0 w-64 transition duration-300 transform bg-neutral-900
@@ -10,7 +11,7 @@
             <div className="flex items-center justify-center mt-5">
                 <div className="flex items-center">
                     <span className="text-white text-2xl mx-2 font-semibold">
-                       QueGastos
+                        QueGastos
                     </span>
                 </div>
             </div>
@@ -35,8 +36,22 @@
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useSidebarStore } from '../stores/sidebar'
+
 export default {
-    name: "sidebar"
+    name: "sidebar",
+    computed: {
+        ...mapStores(useSidebarStore)
+    },
+    data() {
+        return {
+            open: ""
+        }
+    },
+    created() {
+        this.open = this.sidebarStore.isOpen
+    }
 
 }
 </script>
